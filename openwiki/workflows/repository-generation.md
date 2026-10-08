@@ -44,10 +44,10 @@ sources:
     resource: repo://test/agent/repository-runner.test.ts
   - id: openwiki-source-77febf5d49f26cc2405db8dd
     resource: repo://test/generation/repository-run.test.ts
-generated: { by: "openwiki/0.7.1", at: "2026-10-07T08:10:39.081Z" }
+generated: { by: "openwiki/0.7.1", at: "2026-10-08T08:11:37.939Z" }
 verified:
   - by: openwiki/0.7.1
-    at: 2026-10-07T08:10:39.081Z
+    at: 2026-10-08T08:11:37.939Z
 ---
 
 # Repository Generation Lifecycle
@@ -536,9 +536,12 @@ the missing-snapshot `invalid_state` unless the host supplies snapshots itself.
 ## Parallel page workers
 
 The native runner drives page generation through `runPendingPageAgents`, which
-runs up to `pageConcurrency` worker loops at once (default 1). Each worker still
-owns exactly one page; concurrency is about how many pages are in flight, not
-about splitting a single page.
+runs up to `pageConcurrency` worker loops at once. `pageConcurrency` is resolved
+from the `OPENWIKI_PAGE_CONCURRENCY` environment variable by
+`resolvePageConcurrency`, which accepts an integer from 1 to
+`MAX_PAGE_CONCURRENCY` (8) and defaults to 1 when unset. Each worker still owns
+exactly one page; concurrency is about how many pages are in flight, not about
+splitting a single page.
 
 ### Worker pool ownership
 

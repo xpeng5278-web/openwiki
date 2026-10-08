@@ -120,6 +120,8 @@ sources:
     resource: repo://test/integrations/protocol.test.ts
   - id: openwiki-source-d1d0d34cd042b7cd70476a68
     resource: repo://test/integrations/session-manager.test.ts
+  - id: openwiki-source-edf02a9b1f4cbcd3e15a14b4
+    resource: repo://test/linking/wiki-workspaces.test.ts
   - id: openwiki-source-5c504746431185b33e3c7f39
     resource: repo://test/mermaid/dom-shim.test.ts
   - id: openwiki-source-43240ab040106a6f63192176
@@ -128,6 +130,8 @@ sources:
     resource: repo://test/openrouter-debug-fetch.test.ts
   - id: openwiki-source-2b788920f8a5c721b3430f6c
     resource: repo://test/openwiki-home.test.ts
+  - id: openwiki-source-1391f1c28006a2f5465f9f9c
+    resource: repo://test/retrieval/wiki.test.ts
   - id: openwiki-source-e3be493bc871948f42420690
     resource: repo://test/visualize/client-interaction.test.ts
   - id: openwiki-source-1904eaebd82125a3a3881dac
@@ -140,10 +144,10 @@ sources:
     resource: repo://tsconfig.json
   - id: openwiki-source-fbadcd8591b65031efaaedce
     resource: repo://vitest.config.ts
-generated: { by: "openwiki/0.7.1", at: "2026-10-07T08:10:39.081Z" }
+generated: { by: "openwiki/0.7.1", at: "2026-10-08T08:11:37.939Z" }
 verified:
   - by: openwiki/0.7.1
-    at: 2026-10-07T08:10:39.081Z
+    at: 2026-10-08T08:11:37.939Z
 ---
 
 # Testing Guide
@@ -296,6 +300,8 @@ matching path. The most important mappings:
 | `test/cli/` (incl. `test/cli/run-log/`)                                                                                                                    | `src/cli/` — CLI wiring, Ink components, the run-log reducer/progress/summary/activity/tool-input helpers, and error diagnostics (`--debug` stack extraction/redaction, OpenRouter metadata, `previous_errors` capping)                                    |
 | `test/setup/`                                                                                                                                             | `src/setup/` — the credentials setup wizard                                                                   |
 | `test/visualize/`                                                                                                                                          | `src/visualize/` — the live-server/static-export HTML page, graph payload, server, static export, client-lib pure logic, and browser client interaction wiring |
+| `test/linking/`                                                                                                                                           | `src/linking/` — wiki-workspace discovery, the workspace registry, active-workspace switching, and wiki-search scope resolution                          |
+| `test/retrieval/`                                                                                                                                          | `src/retrieval/` — wiki section reading and the search/retrieval entry point                                                  |
 | `test/config/`, `test/mermaid/`, `test/scheduling/`, `test/telemetry/`, `test/auth/`, `test/ingestion/`, `test/platform/` | the matching `src/` subsystem                                                                                 |
 
 Related architecture and subsystem pages: the
@@ -760,6 +766,21 @@ re-setup. Sibling files
 `test/ingestion/langsmith-modes.test.ts`) cover the ingestion run,
 `parseIngestionTarget`/`createConnectorSynthesisGuidance`, and connector modes.
 
+### Linking and retrieval: wiki workspaces and search
+
+`test/linking/wiki-workspaces.test.ts` exercises `src/linking/wiki-workspaces.ts`
+against real temp repositories (redirecting `OPENWIKI_CONFIG_DIR`/`$HOME`): it
+pins `discoverRepositories`/`discoverRepositoriesFromPath` (including nested and
+symlinked roots), the workspace registry (`readWikiWorkspaceRegistry`/
+`saveWikiWorkspaces`), `setActiveWikiWorkspace`/`clearActiveWikiWorkspace`
+switching, `listWikiWorkspaces`/`listWorkspaceWikis`, `resolveReadableWiki` and
+`resolveWikiSearchScope`, and `workspaceDrafts`. It also tolerates a backend that
+returns a human-readable not-found error when switching away from a workspace
+whose backing checkout was removed. `test/retrieval/wiki.test.ts` exercises
+`src/retrieval/wiki.ts`'s `readWikiSections` (section-level Markdown reading) and
+`searchWiki` (the retrieval entry point that ranks and returns wiki sections),
+writing throwaway wiki pages into a temp active workspace first.
+
 ### CLI: run-log, diagnostics, and Ink components
 
 `test/cli/` mirrors `src/cli/`, splitting CLI wiring (TypeScript entry points)
@@ -1183,6 +1204,8 @@ file or directory, or `-t "<name>"` to scope by test name.
 - **Published package-contents guard:** `pnpm exec vitest run test/integrations/package-contents.test.ts`.
 - **Integrations/MCP CLI runners:** `pnpm exec vitest run test/cli/integrations-runners.test.ts`.
 - **Code-mode ingestion setup:** `pnpm exec vitest run test/ingestion/code-mode.test.ts`.
+- **Wiki-workspace discovery and registry:** `pnpm exec vitest run test/linking/wiki-workspaces.test.ts`.
+- **Wiki search and section reading:** `pnpm exec vitest run test/retrieval/wiki.test.ts`.
 - **Visualizer graph builder:** `pnpm exec vitest run test/visualize/visualize-graph.test.ts`.
 - **Visualizer client interaction regression:** `pnpm exec vitest run test/visualize/client-interaction.test.ts` (jsdom; run `test/visualize/` for the full page/graph/client-lib slice).
 - **Agent stream redaction:** `pnpm exec vitest run test/agent/stream-redaction.test.ts` (pins `parseAgentStreamChunk`'s suppression of file/image/input_file/image_url base64 blocks, `model_request` namespace classification, and `updates`-mode tool-call-only message handling).

@@ -52,10 +52,10 @@ sources:
     resource: repo://src/platform/language.ts
   - id: openwiki-source-cfc15a67b4c02c45974332dc
     resource: repo://test/generation/page-jobs.test.ts
-generated: { by: "openwiki/0.7.1", at: "2026-10-07T08:10:39.081Z" }
+generated: { by: "openwiki/0.7.1", at: "2026-10-08T08:11:37.939Z" }
 verified:
   - by: openwiki/0.7.1
-    at: 2026-10-07T08:10:39.081Z
+    at: 2026-10-08T08:11:37.939Z
 ---
 
 # Claims Reconciliation on Update

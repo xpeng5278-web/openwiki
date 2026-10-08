@@ -13,14 +13,15 @@ tags:
     entra-id,
     operations,
   ]
-verified:
-  - by: openwiki/0.7.1
-    at: 2026-10-07T08:10:39.081Z
 sources:
+  - id: openwiki-source-fcb06f91f699f462b4d84a90
+    resource: repo://src/agent/crash-guard.ts
   - id: openwiki-source-049f71d42424ecd8987d5e9f
     resource: repo://src/agent/entra-auth.ts
   - id: openwiki-source-a953060a04ccefcf777de48e
     resource: repo://src/agent/index.ts
+  - id: openwiki-source-69abc6f0f641147820a274bc
+    resource: repo://src/agent/utils.ts
   - id: openwiki-source-278e7e180eac811fc1a24f7a
     resource: repo://src/config/constants.ts
   - id: openwiki-source-c2770ac037a7f4b0116a0dc5
@@ -29,6 +30,8 @@ sources:
     resource: repo://src/config/openwiki-home.ts
   - id: openwiki-source-f1dd0edb129e50f253618ff4
     resource: repo://src/config/reasoning.ts
+  - id: openwiki-source-2ee243215d1bc77f9f1a0473
+    resource: repo://src/integrations/install/atomic-file.ts
   - id: openwiki-source-04a008dbe4969919f7141a55
     resource: repo://src/platform/diagnostics.ts
   - id: openwiki-source-27fbd70857f0fae28185fe91
@@ -43,7 +46,10 @@ sources:
     resource: repo://test/config/constants.test.ts
   - id: openwiki-source-3782823f29993efcdedd20ac
     resource: repo://test/config/env-behavior.test.ts
-generated: { by: "openwiki/0.7.1", at: "2026-10-07T08:10:39.081Z" }
+generated: { by: "openwiki/0.7.1", at: "2026-10-08T08:11:37.939Z" }
+verified:
+  - by: openwiki/0.7.1
+    at: 2026-10-08T08:11:37.939Z
 ---
 
 # Configuration and Environment
@@ -51,10 +57,13 @@ generated: { by: "openwiki/0.7.1", at: "2026-10-07T08:10:39.081Z" }
 OpenWiki is configured almost entirely through environment variables. Provider
 credentials, model selection, token limits, streaming toggles, reasoning
 effort, and Entra ID authentication are all read from `process.env`, with a
-persisted fallback file at `~/.openwiki/.env`. This page describes where that
-state lives, how values are loaded and saved, the precedence between the shell
-and the saved file, how secrets are sanitized, and the key settings a reader
-needs to operate OpenWiki.
+persisted fallback file at `~/.openwiki/.env`. Separately, each repository run
+records its outcome into `openwiki/.last-update.json` (or `.last-update.json`
+at the local-wiki root), written atomically and stamped `interrupted` by the
+crash guard when a run dies. This page describes where that state lives, how
+values are loaded and saved, the precedence between the shell and the saved
+file, how secrets are sanitized, the crash guard that protects the per-run
+metadata, and the key settings a reader needs to operate OpenWiki.
 
 Related reading: [Model providers](../concepts/model-providers.md),
 [CLI reference](./cli-reference.md), and [Onboarding](../workflows/onboarding.md).
@@ -423,3 +432,58 @@ OpenRouter response bodies, and MCP tool args/results — shares it, so a key
 redacted by one path is redacted by all. `isAuthError` classifies failures as
 credential rejections from HTTP 401/403 status and the already-redacted message,
 driving whether the CLI shows the authentication "how to fix" panel.
+
+## The `.last-update.json` crash guard
+
+Every `init`/`update` run records post-run metadata — `updatedAt`, `command`,
+`gitHead`, `model`, `status`, and optional `language` — at
+`openwiki/.last-update.json` (`UPDATE_METADATA_PATH`) in repository mode, or
+`.last-update.json` (`LOCAL_WIKI_METADATA_PATH`) at the local-wiki root.
+`writeLastUpdateMetadata` writes the file through `writeTextAtomic`, which
+writes the content to a uniquely named `.<basename>.<uuid>.tmp` sibling and
+`rename`s it into place, preserving the destination's existing mode bits (or
+`0o644` when creating it). The rename keeps the prior metadata intact until
+the new JSON is fully serialized, so a mid-write crash (ENOSPC, power loss)
+cannot truncate the checkpoint the next update diffs against.
+
+`persistRunMetadataIfChanged` is the run-boundary wrapper. It always refreshes
+the `updatedAt` timestamp so freshness checks reflect the actual last run even
+when content is unchanged (a no-op update still means OpenWiki ran), and a
+completed run clears any previous `interrupted` status so the update no-op
+check can skip again. It returns `false` (and writes nothing) for `chat` or
+when no before-snapshot was captured, so the metadata is only touched by
+content-bearing init/update runs.
+
+`installCrashGuard` registers process-global `unhandledRejection` and
+`uncaughtException` handlers once at CLI startup, before any run begins. A
+run registers itself with `registerActiveRun` (command, `cwd`, `modelId`,
+`outputMode`, the content snapshot taken before the run, and the effective
+language) on entry and clears it in its `finally`; OpenWiki runs one run per
+process, so a single module-level slot suffices. When a rejection escapes
+every catch, `handleFatal` claims the active run **synchronously, before any
+`await`** — reading and clearing the slot with no microtask between the two —
+so the first handler owns the crash and every later handler in a burst sees
+`undefined` and only exits. It then, best-effort and each side effect wrapped
+independently: (1) records the crash through `recordRunSafe` as a classified,
+fingerprinted failure so an escaped rejection finally appears in telemetry, and
+(2) stamps the run `interrupted` via `persistRunMetadataIfChanged`, so the
+next scheduled update retries instead of no-op'ing against a half-written
+wiki. Telemetry is awaited only so its flush has a chance to complete; a
+telemetry failure never blocks the stamp or the non-zero exit. The local
+stderr line carries the raw message (the user's own terminal) and a stack only
+under `OPENWIKI_DEBUG`; the process exits non-zero on the next tick so Node
+does not continue with undefined state.
+
+The update no-op machinery in `readLastUpdate` reads the metadata back
+defensively: a missing file or `SyntaxError` returns `null`, a structurally
+invalid file returns `null`, and a record written before the `status` field
+existed is treated as `complete` so an upgrade never forces a spurious re-run.
+`getUpdateNoopStatus` forces a rebuild when the prior run was `interrupted` or
+has no `gitHead`; otherwise it diffs the current `gitHead` against the recorded
+one and filters the working-tree status through `isUpdateMetadataStatusLine`,
+which ignores changes to `openwiki/.last-update.json` and
+`openwiki/.page-manifest.json` (and their `-> ` rename forms) so the metadata
+files themselves never look like meaningful content changes. The content
+snapshot likewise excludes those metadata files plus `.run.json` via
+`isIgnoredSnapshotPath`, so a no-op refresh re-writes `.last-update.json`
+without it appearing as a content change.

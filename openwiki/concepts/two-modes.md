@@ -4,6 +4,8 @@ title: Code vs Personal Modes
 description: How OpenWiki chooses between code mode (a repository wiki written to openwiki/) and personal mode (a knowledge brain written to ~/.openwiki/wiki), including mode selection, state directories, and which capabilities apply to each mode.
 tags: [modes, cli, configuration, repository-wiki, personal-wiki, output-mode]
 sources:
+  - id: openwiki-source-ca6cb4b1a14fd7969dfae3ec
+    resource: repo://CHANGELOG.md
   - id: openwiki-source-23775c3de52f3ab95a13cb8b
     resource: repo://README.md
   - id: openwiki-source-12c17ed8ca9c89ec61f28df7
@@ -12,6 +14,8 @@ sources:
     resource: repo://src/agent/index.ts
   - id: openwiki-source-8bf337d8927152d7d30230b4
     resource: repo://src/agent/prompt.ts
+  - id: openwiki-source-e6e6ad50adcacff30c80660c
+    resource: repo://src/agent/prompts/code.ts
   - id: openwiki-source-5d1891104d4c886504a5cc7d
     resource: repo://src/agent/types.ts
   - id: openwiki-source-69abc6f0f641147820a274bc
@@ -28,16 +32,18 @@ sources:
     resource: repo://src/config/openwiki-home.ts
   - id: openwiki-source-01c7d07d9800df0261f20efb
     resource: repo://src/connectors/tools.ts
+  - id: openwiki-source-85064d6a188fa56bcc282f11
+    resource: repo://src/ingestion/code-mode.ts
   - id: openwiki-source-c6189f89b3f67d0cbf87739f
     resource: repo://src/ingestion/ingestion.ts
   - id: openwiki-source-3c86ca0bb7fbb79f2be66a2b
     resource: repo://src/integrations/core/retrieval-tools.ts
   - id: openwiki-source-eab9328975981f427c4218d0
     resource: repo://src/integrations/mcp/server.ts
-generated: { by: "openwiki/0.7.1", at: "2026-10-07T08:10:39.081Z" }
+generated: { by: "openwiki/0.7.1", at: "2026-10-08T08:11:37.939Z" }
 verified:
   - by: openwiki/0.7.1
-    at: 2026-10-07T08:10:39.081Z
+    at: 2026-10-08T08:11:37.939Z
 ---
 
 # Code vs Personal Modes
@@ -169,6 +175,18 @@ apply to code repository wikis only:
   that reference Claims state are rejected. This ownership boundary is applied
   only in `repository` output mode — `isClaimsPath` returns false unless
   `outputMode === "repository"`.
+- **Repository agent-instruction files.** Code-mode setup
+  (`ensureCodeModeRepoSetup`) keeps the root `AGENTS.md` and `CLAUDE.md`
+  pointed at the generated wiki by refreshing managed
+  `<!-- OPENWIKI:START -->…<!-- OPENWIKI:END -->` snippets in place. Only
+  `AGENTS.md` is created when missing; a missing `CLAUDE.md` is left untouched
+  — since 0.6.1, code mode stopped creating `CLAUDE.md` — because Claude Code
+  reads `AGENTS.md` when no `CLAUDE.md` exists but an existing one shadows it,
+  so an existing `CLAUDE.md` still needs the block while a missing one never
+  needs to be created. When both files resolve to the same file on disk,
+  `CLAUDE.md` carries the full instructions rather than the `@AGENTS.md`
+  import. The code-mode prompt separately instructs the model not to create or
+  update `/AGENTS.md` or `/CLAUDE.md` during normal wiki runs.
 - **Host-driven (coding-agent) runs.** Running OpenWiki inside Codex, Claude
   Code, OpenCode, and the other registered coding agents currently supports
   repository code wikis only, not personal brains. The MCP lifecycle the host

@@ -53,10 +53,10 @@ sources:
     resource: repo://test/telemetry/telemetry.test.ts
   - id: openwiki-source-9ba5e33980ba1f452c6884d4
     resource: repo://test/telemetry/with-run-telemetry.test.ts
-generated: { by: "openwiki/0.6.1", at: "2026-09-30T08:10:27.967Z" }
+generated: { by: "openwiki/0.7.1", at: "2026-10-08T08:11:37.939Z" }
 verified:
   - by: openwiki/0.7.1
-    at: 2026-10-07T08:10:39.081Z
+    at: 2026-10-08T08:11:37.939Z
 ---
 
 # Telemetry and Diagnostics
@@ -317,6 +317,6 @@ the no-key send path in `client-no-key.test.ts`, and the install-id lifecycle in
 
 ## Related pages
 
-- [Architecture Overview](../architecture/overview.md)
-- [Configuration](./configuration.md)
-- [Testing Overview](../testing/overview.md)
+- [Agent Runtime](../architecture/agent-runtime.md)
+- [CI Scheduling and Self-Update](./ci-scheduling.md)
+- [Configuration and Environment](./configuration.md)

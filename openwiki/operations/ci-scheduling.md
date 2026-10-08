@@ -37,10 +37,10 @@ sources:
     resource: repo://src/scheduling/schedules.ts
   - id: openwiki-source-7cf549510278a62e11ae8280
     resource: repo://test/scheduling/schedules.test.ts
-generated: { by: "openwiki/0.7.1", at: "2026-10-07T08:10:39.081Z" }
+generated: { by: "openwiki/0.7.1", at: "2026-10-08T08:11:37.939Z" }
 verified:
   - by: openwiki/0.7.1
-    at: 2026-10-07T08:10:39.081Z
+    at: 2026-10-08T08:11:37.939Z
 ---
 
 # CI Scheduling and Self-Update
@@ -222,10 +222,10 @@ Every example follows the same shape:
 The PR is scoped to the documentation paths (`openwiki`, `AGENTS.md`, `CLAUDE.md`,
 and the workflow file), branched under `openwiki/update` (GitHub) or
 `openwiki/update-<pipeline id>` (GitLab/Bitbucket), with the commit and title
-`docs: update OpenWiki`. On GitHub, the workflow path is listed only when present
-(`AGENTS.md` and `CLAUDE.md` are optional); the explicit `git diff --quiet` check
-in the GitLab and Bitbucket examples lists the fixed path set including the
-workflow file.
+`docs: update OpenWiki`. On GitHub, only `CLAUDE.md` is added conditionally (when
+it exists); `openwiki`, `AGENTS.md`, and the workflow file are always staged. The
+explicit `git diff --quiet` check in the GitLab and Bitbucket examples lists the
+fixed path set including the workflow file.
 
 The GitHub example also models a **failure-tolerant** run. The `openwiki code
 --update` step sets `continue-on-error: true` so a failed generation does not

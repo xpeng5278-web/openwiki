@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:03f1b32243023d08f03e0b534bae0462c24845a88c2e4bb041e847d43d74f22b",
+  "pageVersion": "sha256:d7c3bccf27aa609e305e4a698ec339303ecb080fc00818afa0f85d2ef9c44a16",
   "claims": [
     {
       "id": "claim_fe4e1fc83ccd4d9290e42536a6e48032",
@@ -1129,10 +1129,32 @@
           "version": "repo-lines-v1:sha256:453bd778c6d3555c74fb73561ee1db6cc66fc8c04de197bcc6005194110f36cd:eyJzZWxlY3RlZExpbmVDb3VudCI6NTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYyNjc1MDIxYTNlYmY4YTllYzAyNmUxM2ZkZTc4OTc1Yzg1OGY4MDZlN2I5MmNhNmMwMDZlYjI2MzgwMzk5YjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI2MmM0ZmZlZGM1NzYzNTZmYzllZGE5N2E2NTY3MzU1YTFiOTZkNzQ3NTk0MTEyMWM0ZTcxMDY5ODYyZDQ4NjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBmZWNkZWEzZGI0YjgyMTFmYTFlM2VlZDg1NTdlM2YzMDlkM2Y4YzBjY2E1ZTRhNTZkMzc5MDNkYWQ1ZGYwZjEifQ"
         }
       ]
+    },
+    {
+      "id": "claim_1a11a9da8ed846a3a8129d3115ba83a6",
+      "statement": "test/linking/ mirrors src/linking/ and test/retrieval/ mirrors src/retrieval/. test/linking/wiki-workspaces.test.ts exercises the wiki-workspace surface (discoverRepositories/discoverRepositoriesFromPath, the workspace registry, setActiveWikiWorkspace/clearActiveWikiWorkspace switching, listWikiWorkspaces/listWorkspaceWikis, resolveReadableWiki/resolveWikiSearchScope, workspaceDrafts) against real temp repositories redirecting OPENWIKI_CONFIG_DIR/$HOME. test/retrieval/wiki.test.ts exercises readWikiSections (section-level Markdown reading) and searchWiki (the ranked section-retrieval entry point) against throwaway wiki pages in a temp active workspace.",
+      "evidence": [
+        {
+          "resource": "repo://test/linking/wiki-workspaces.test.ts#L1-L29",
+          "version": "repo-lines-v1:sha256:7436af23ba8759db84c90765ee179a8e0ab14964625f1bab772fe74bebc28968:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU4MjAwOTY0YTk3ODYzNTUyMmIyYWIwOTBjNjUwNjVkOGVmOGU4NWM0NzMwYmIyZWIwNDYwZDM0YzY3N2RkYmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgxNWQ3MjhhMmI4M2ZjZTcwYzI1NGZjYjYwZWQxYTU2M2YxMTZiNmI2MTViMzZjMTE4NGFiMTY5ZGJmNjIxMTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNiY2YzMmZiODIzYTA1MzE5NzJmOWU1ZTVjMTMxZWI5NWRlM2UwZDI0YzBkODE2ZWUxOTU1MzlmNzVjYTkzOGIifQ"
+        },
+        {
+          "resource": "repo://test/linking/wiki-workspaces.test.ts#L107-L108",
+          "version": "repo-lines-v1:sha256:c8c13a31f3642a2ac4b70c990acb033fbd475c9fb2c63f252917cd6dfc691d6a:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNThkZGVhNmMwNjcwOTc2MTY4ODNlZTIxMjljNDlhYjgyYTlhOTlhNmRjN2RkYjdjNjhlZjgzNDZlMzA5MzAxNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjFiODRmNmJjYzZiZGFlMDhhMDQxMGM0NWUzNTdmNjI1ZjEzMTczZjYwZGZlZjQ2MzhiNjViYjRiYWIxMTBhMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjgwZDJkZDRmMjg5ZDI2ZGM3NTdjMmI2NWEwNmMzOTIyN2E2NzE3YzRiNDhiNWEzOTc5MmM5ZjExZTQxYWVhNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzE1NThlODYzY2I2YzI5ODQ3OTUyZjg1ZmFiZThiMDI2YzVhNGIwYjNmNGIxZGJiNTE4YmRiNTQ5Zjc1NzY2ZCJ9"
+        },
+        {
+          "resource": "repo://test/retrieval/wiki.test.ts#L1-L11",
+          "version": "repo-lines-v1:sha256:a4a08967ba11ddb6b934d503b9a9d33a15f82055dad94613d5bc84831f2b6a51:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjODJlZmRmODdiY2IxMzg5NWE1MmZmN2FkNmJjM2UzYWNjNjk3M2FmMTkzMzU4MzMyZWJjMjM0YzJjZDUxYjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhOGUyNDQ2NjQ2NTVhMzk0ODI3MzQ4OWVkNjAxNzA5MjlkNjMyMGEwNGQxZDhkNDRlOTU3OTU4Njg2NzRmYTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU2ZTEzYTM0ZGU4YjJhZDdmMTFlOGYyMzkxYzZhY2NjN2FhNDUzMWYyZTFhYmVjMTVkMDJlZjFkYWM3YjQxOWIifQ"
+        },
+        {
+          "resource": "repo://test/retrieval/wiki.test.ts#L145-L180",
+          "version": "repo-lines-v1:sha256:48166b1e45b3649c4ad4160b638541b90f1400097a460271d837700eedb6d328:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI0MzE1ZmYwYmY0NzRlNGFmMDU1NDYzMzEwZjBiMzgwYWY0MzE3YjZiNDQ1ZGM0Y2VmNGRmOGI5MDllYWU0ZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNkMDljZmYwODI4NDcwZWVkM2ZjNGJkNTdjOThhNTZkMzYwZTQ3YmI3YWViZmQwYmMwOGFmNjRjOWY3YjE0YTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY4MGQyZGQ0ZjI4OWQyNmRjNzU3YzJiNjVhMDZjMzkyMjdhNjcxN2M0YjQ4YjVhMzk3OTJjOWYxMWU0MWFlYTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYwYmZjMmMxNWQ3Zjc4MDVmZGUzN2FkMjFmNzhjMmZmNTdhZmE2YzNkNDdjMjJlMDU2MjJiMTMwN2ZmMmNkZDYifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.1",
-    "at": "2026-10-07T08:10:39.081Z"
+    "at": "2026-10-08T08:11:37.939Z"
   }
 }

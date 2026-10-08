@@ -30,10 +30,10 @@ sources:
     resource: repo://src/platform/language.ts
   - id: openwiki-source-f5f9f9512cc2874a9127f6e1
     resource: repo://test/cli/diagnostics/error-diagnostics.test.ts
-generated: { by: "openwiki/0.7.1", at: "2026-10-07T08:10:39.081Z" }
+generated: { by: "openwiki/0.7.1", at: "2026-10-08T08:11:37.939Z" }
 verified:
   - by: openwiki/0.7.1
-    at: 2026-10-07T08:10:39.081Z
+    at: 2026-10-08T08:11:37.939Z
 ---
 
 # CLI Commands and Flags
@@ -130,9 +130,11 @@ positional word (`openwiki code ...`), a positional mode word in the first slot
 even when flags precede it (`openwiki --print code --update`), or the `--mode`
 flag (`--mode code` or `--mode=code`). An explicit `--mode` that conflicts with
 an already-selected non-default mode is a parse error (`resolveExplicitMode`).
-When no mode is given, `parseRunCommand` defaults to `personal` for interactive
-chat but promotes to `code` for `init`/`update` runs that did not select a mode.
-Mode determines the run's working directory and output target:
+When no mode is given, `parseRunCommand` defaults to `code` — a bare
+`openwiki` opens the code chat for the current repository, and `init`/`update`
+runs target the repository too — so `personal` must be selected explicitly
+(`openwiki personal ...` or `--mode personal`). Mode determines the run's
+working directory and output target:
 `getRunModeCwd`/`getRunModeOutputMode` map `code` to the current repository and
 `repository` output, and `personal` to the local wiki directory and `local-wiki`
 output.

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:010302356be3bb752f10256ea65d5decf220ffc648eb521cb577fa0f4c75eb86",
+  "pageVersion": "sha256:77bd7016d515dd7e7200ce98e25d587ca3db4857e71ff4131d00c9b97feff989",
   "claims": [
     {
       "id": "claim_b7c92dfb63db42c6ab9db3a60115cec9",
@@ -279,10 +279,32 @@
           "version": "repo-lines-v1:sha256:cc45291bfdfb12b90418f0cea2fc2406f737ec15a606b517a27ec45267bee5a7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdhYjk5YzA4MGU1ZTI2MGIyYjYxYjE3YzExM2QxY2FhMjRmZDYwZTg5YWNjOTU4OGE2ZWYwZGE1OTU5ZWUxZTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliZDQ1YTc5YjVhZjlkNDUzZWEwOGIyNDI1NjU4YTE4N2IwOTcwMTMyNzgyOWFkZmVmNzQzYmQwNjIwYzA1MjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM5MTRjMmI4NzRkNWEzMzg1MThjYjY1ODgyM2Q3Mzk1ZWQ5OTIyZWJjMzM3ZmYyYmNjNjliMmJmMDc1YTkyN2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUxOWFjZmRiN2UwNTQ0YTU3ZjBhYTUxZjI5OGY3YzE4NWQ5MjhlMzk1OTQyN2Y3MDFhYmFjZjI1YWQ5YTEzMTkifQ"
         }
       ]
+    },
+    {
+      "id": "claim_e8ffa773b03b4e35a7449c62e2c9867c",
+      "statement": "Code-mode repository setup (ensureCodeModeRepoSetup) refreshes managed OPENWIKI:START/END snippets in root AGENTS.md and CLAUDE.md in place, but only creates AGENTS.md when missing — since 0.6.1, a missing CLAUDE.md is left untouched rather than created. The setup special-cases CLAUDE.md (returning nextContent: undefined when missing; keeping a bare @AGENTS.md import byte-for-byte; and, when AGENTS.md and CLAUDE.md resolve to the same file, writing the full instructions into CLAUDE.md). The code-mode prompt separately instructs the model not to create or update /AGENTS.md or /CLAUDE.md during normal code wiki runs.",
+      "evidence": [
+        {
+          "resource": "repo://CHANGELOG.md#L63-L63",
+          "version": "repo-lines-v1:sha256:9e6bc89aac2164d821d754105ef8a4d65155d855caf2ee1deae81779d216bbbc:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWU2YmM4OWFhYzIxNjRkODIxZDc1NDEwNWVmOGE0ZDY1MTU1ZDg1NWNhZjJlZTFkZWFlODE3NzlkMjE2YmJiYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWU2YmM4OWFhYzIxNjRkODIxZDc1NDEwNWVmOGE0ZDY1MTU1ZDg1NWNhZjJlZTFkZWFlODE3NzlkMjE2YmJiYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzA0MWRjZjJiNDhlYWM4ZmU5ZGM3ODg5N2U5NWY3OWUyOWYwZjc2YWI4ODc0MGQ4Y2Y3YjI5YjEwMzY5MTY0NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGE5N2Q3ZGI0MjRhZTAwZWI2YmIwMTk5YTRmNThiN2VjZDI4ZTUwOWU1NGE5NzVlOTQ1MjJjM2NlMjBmZjQ1OSJ9"
+        },
+        {
+          "resource": "repo://src/agent/prompts/code.ts#L33-L34",
+          "version": "repo-lines-v1:sha256:aaabf02ead5510f238c6442f8a931815614f63d07db0364216ab0c174b4567e1:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzllNDYwZTI2MDI1NTk3MTkwOWE2NTVlZjdkNGJlMWNjZGUxNzY2ZDcxMWYzMDE1YjVlYzU4M2IzOTA0NGUwOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOGI5Njc3MjllYTY5ZDViZjY5OWFkYWM1OTk3NDI3YTliYWUxMWFiNjFlMTBlYTY3OWViZDg5OTYyYmQwZTI3MiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiM2IxOTJhNmNkNWZlMmZjNjcxY2VjZjczZTQzZmMzZDAwZjdiNDNmZTJlZTU4OWJjMDQwMzBkMmFkMzRmZWVlOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTRjN2E2NjIwZTA1YTYzMzc1ZTdkNzg3YWVjYWNkMDIxZTJkNWI2NmU2YjZmZGQ2MzI1MmFjY2U0OWFlN2IwNCJ9"
+        },
+        {
+          "resource": "repo://src/ingestion/code-mode.ts#L216-L266",
+          "version": "repo-lines-v1:sha256:1f5e5515146ff79b1968aac596140cf2de99e295039c7f451bdeb23cf37c6bba:eyJzZWxlY3RlZExpbmVDb3VudCI6NTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFlZWZiMmM4ZThiNDY5NmZhMDY3MDkxNTJjNTViYzEyNjM5YjEyYWY3MmY3ODlhY2I1MTgxZGJiOWNkMmQ2NTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjEwMDE2OGQzNjA4MWNhMmJjZGQyNjg0OGEzMzkyMDk1NDYyOThkNzVkNTZiZTI4OWFlODRiYTMwZGE1YTk3YWIifQ"
+        },
+        {
+          "resource": "repo://src/ingestion/code-mode.ts#L44-L86",
+          "version": "repo-lines-v1:sha256:2b0b2b407c4978b55ebe02ecce0db7655d6e7ed7937f0bb8553c797298973d01:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE0Yzg1ZGQwZWU3MWU2MjFmNmY3NDg5ZWNhZDczNTViZGQxY2QxMmI0NTcxYmQ0NDA0YTQ0NTNiMmU1ODdjNDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwOGRhNmFjNGNlNzE0OWRlODRiMDBmYTZiMTk2NjJmNGFkNzA2ZGNjNWY4M2EyYTUzN2QwNzU3YTg3OThjNGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRiMGUxZDE4ZjQ2MWY5NTFhYmQxNzk0Mjc2N2QxM2RmYjhkNDkwNTY5OGQzMjY0NDk5NGE3MDQzYjU1N2U3Y2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM3OTI5ZTkxZTBmOTljM2U4MjVkZTY5YjQzNWZiNjQ4NGQxYjBhMWRmMmY0NjU2MWFiZjFhMjlmMDQxODhiODgifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.1",
-    "at": "2026-10-07T08:10:39.081Z"
+    "at": "2026-10-08T08:11:37.939Z"
   }
 }

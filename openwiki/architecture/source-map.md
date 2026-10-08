@@ -86,6 +86,8 @@ sources:
     resource: repo://src/mermaid/fences.ts
   - id: openwiki-source-3a971b24f14be56fa16b8e4b
     resource: repo://src/mermaid/validate.ts
+  - id: openwiki-source-ebe194cbeaa2594a6699f9a1
+    resource: repo://src/model-availability.ts
   - id: openwiki-source-54432f9303757678a104d85f
     resource: repo://src/okf/frontmatter.ts
   - id: openwiki-source-2f1e489d53c52a0582582659
@@ -108,10 +110,10 @@ sources:
     resource: repo://src/visualize/server.ts
   - id: openwiki-source-d485c898eb60ebb173072eab
     resource: repo://test/agent/stream-redaction.test.ts
-generated: { by: "openwiki/0.7.1", at: "2026-10-07T08:10:39.081Z" }
+generated: { by: "openwiki/0.7.1", at: "2026-10-08T08:11:37.939Z" }
 verified:
   - by: openwiki/0.7.1
-    at: 2026-10-07T08:10:39.081Z
+    at: 2026-10-08T08:11:37.939Z
 ---
 
 # Source Map
@@ -264,7 +266,13 @@ error — wired into `createModel`'s `openai-compatible` `entra-id` branch), and
 the IBM Bob fetch adapter (`bob.ts`, whose `createBobFetch` rewrites
 `Authorization: Bearer …` to `Apikey <key>` and sets the
 `ibm-bob-openwiki-provider` `User-Agent` required by Bob's Cloudflare WAF —
-wired into `createModel`'s `bob` branch).
+wired into `createModel`'s `bob` branch), and the selected-model availability
+gate (`src/model-availability.ts`, whose `getSelectedModelAvailability`
+`runOpenWikiAgent` calls before constructing the model — for the `openai`
+provider it queries the catalog and throws a setup error when the model is not
+exposed to the configured credentials, while any other provider, a custom
+endpoint, or a failed lookup returns `unknown` and the run proceeds, since a
+catalogue lookup failure is not proof a model cannot be invoked).
 
 `repository-runner.ts` owns the native runner's full responsibility set.
 `runNativeRepositoryGeneration` drives the loop — begin the durable run

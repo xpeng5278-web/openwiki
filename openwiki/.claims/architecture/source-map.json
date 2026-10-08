@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:72cf1e7d1b4db7f60147a170d8eda5dff498fd52bfad5274c6e46c4f1531dcce",
+  "pageVersion": "sha256:f7b9d20185c470db4e0438c501f1771627a7824ce26df7cbc2d04cfa0b191e64",
   "claims": [
     {
       "id": "claim_b3bcf02b8ac0428c909611ba967f994a",
@@ -831,10 +831,24 @@
           "version": "repo-lines-v1:sha256:8dfdff39f84e5da257e91094d7c86095048c89bb1dc4282fecb560a981454c81:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY2MjliYWI5ZWE2MjU0MTVmMGU2MGI3NDMyZGI3YzQ4NmYyZjNiNDU1OTVjYmQzNWExNDIyMjA5NTIwODU4MzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE2M2I4MTJlZjMyNWJhM2JmMzE5YWIxN2RiMGM5M2E0MzU0ZDRmMWQ4YjUzZTQ1NzRkYmM1YmU1YWJlYmNlYTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMxNmQ4NDNjZTkyNDBkMDI5Y2ZjODhiNTYwMzk3Y2I2OTU3MzllNGExMjVlZTY4OGQ3MjQ4ODQ2NmJjOGZjNzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdiMGQ5NmU0N2M5YTkwNzYwMzIzMmM2YTdlZDY2MDg5OTJlNjM0N2IzNTIzYzA2MzQ2NjJlZjUxYjE5NzY0NDUifQ"
         }
       ]
+    },
+    {
+      "id": "claim_06bbd0abbb7d4d4b96cfbc0e2305f8fc",
+      "statement": "src/model-availability.ts is the selected-model availability gate that runOpenWikiAgent calls before constructing the model: getSelectedModelAvailability returns available/unavailable/unknown. For the openai provider (with no custom baseUrl and an API key present) it queries the OpenAI /models catalog and returns unavailable when the model is not exposed to the configured credentials (runOpenWikiAgent then throws a setup error naming OPENWIKI_MODEL_ID_ENV_KEY), while any other provider, a custom OpenAI-compatible endpoint, a missing key, or a failed lookup returns unknown and the run proceeds, since a catalogue lookup failure is not proof a model cannot be invoked.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent/index.ts#L339-L359",
+          "version": "repo-lines-v1:sha256:50b9fce1bbbc6380a65250190ee925e8d02779290e47a789f4474446b1e087ae:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwNDk4MDExYTY3NGMyZWQ5YWI4MTA3MDIwNDU2NGU4MTNiMDM1N2I0NjM2MDFkMmM5MmEyYTNiYTkwMWJkZjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZWM2MzE1ZTVkNjdmODMwZmNiYWIwZTgyMzE1ZGNhNDU5MTAyYmMyZDE0MmZhMmNlMDFlMzA1NWM3MDEzNzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZlNTYwOTZmY2FhYjhlNmE4YjgyODIyNzk0YmM3NTgyNjFmZTZiNjI0NjYyMThjNWY5MDlkZmI4MWM3OTkyYzQifQ"
+        },
+        {
+          "resource": "repo://src/model-availability.ts#L1-L85",
+          "version": "repo-lines-v1:sha256:319f306833df2a288e95781018f4a4406226a0ab4cf5961f73db9a912566c63c:eyJzZWxlY3RlZExpbmVDb3VudCI6ODUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUyMDNmMzAwMmU1YTZmMGMwM2RkNGI4OGUzODI2Y2EyMjAyYjRiYThhYjhjZGZhNDdlOTY4OGI2ZjQ3YzZlMzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.1",
-    "at": "2026-10-07T08:10:39.081Z"
+    "at": "2026-10-08T08:11:37.939Z"
   }
 }

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:460207380d8051dc407f5b43f9399be6b7ed8d59027da4316179f74a386c66a3",
+  "pageVersion": "sha256:6d84af418707348abea26618af302d70b41ac4f9649b489fa184ebffe4d77402",
   "claims": [
     {
       "id": "claim_f6ee1be411cc44af8ce963e1af7842d1",
@@ -531,10 +531,84 @@
           "version": "repo-lines-v1:sha256:4c653ab175caf85da78fdd219eaaa534e6153636ce51de233d9d2fdfda8a86cf:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4MmIxNTk4Y2YyODg1YTQ4NGE3MDI4Yjk0MDdlM2U0MDQ1YzQyYmRmNzI3MjRkZjA5MjgwNzc2NmU2ZDM0MjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5YTBlODY1M2NkZGJjY2M4NTRhYmQxNjNhMjJhMDkxYzM4YTUwNzA5NzRhNGExOTA2ZjU1NWZkYmE4NzI0ODEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUwMTU3MzM0NjcwNmQzMjY1YmM1ZTMyMjc2OTQ1ODA1NDU2ZDZhYmVhMjc3MmE2MzFhYjIzYTNkNWRmM2FmZDMifQ"
         }
       ]
+    },
+    {
+      "id": "claim_4ca698e09efc4e2f83acf041701b3339",
+      "statement": "OpenWiki runs one run per process; a run registers itself with registerActiveRun (command, cwd, modelId, outputMode, the pre-run content snapshot, effective language) on entry and clears it in its finally via clearActiveRun, so a single module-level ActiveRunRecord slot is the in-flight registry. installCrashGuard installs process-global unhandledRejection/uncaughtException handlers once at CLI startup (idempotent) before any run begins.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent/crash-guard.ts#L15-L84",
+          "version": "repo-lines-v1:sha256:2a6acc7ed4ec1216537d2051ee5b754d3ae05b0a516bd7a24a63ca68d7c66469:eyJzZWxlY3RlZExpbmVDb3VudCI6NzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJmNWFlNTA4NjEzYjIzZmZhYTYyZDVjYjc3OTQ2M2Y5NTViNzkwOTU5NDdkZjNjNDM4Y2NiNTYxNDM0YjgwZDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImExYjhjZDY1MTAyMGEyNjljZmQzMTI3MWVmZTAzNjcwYTA5NzlmYjcxODU0MGEyNWE4MjMyYzUzZmExMzQ2MzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ0ZmI2ZmRkMmY2OTZjMzc2ZWZhZWE3ZjMxYjFmMjUxMTA0NGE3MTI1YTMwM2I2YzI5Y2E0OWI0NTJhZTIwYTUifQ"
+        },
+        {
+          "resource": "repo://src/agent/crash-guard.ts#L173-L185",
+          "version": "repo-lines-v1:sha256:9eec425c84b05f08baa9b28f05c18faecea3f2c554b94ab6350b2ec39ce954fd:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMzNjExZWZiOGMwODM2NDkwNzE5Y2FkZWIyOGY2MTg3MmE5NzUxNWFjZDYxMjYwYzRjYjhlNDU1ZTk0YTAwOTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc3MmZhMjk1ODBhNGIxOGZiZGQxMzI1OWI0MmMyZThiZDI3NDBiMzI0YjFhM2ZkOTBkYmM1MzRlOWQzNWMyMjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_bf46603c826e4ff29815624f3c38dc33",
+      "statement": "handleFatal claims the active run synchronously before any await — reading and clearing the slot with no microtask between the two — so in a burst of escaped rejections the first handler owns the crash and every later handler sees undefined and only exits. It then, best-effort with each side effect wrapped independently, records the crash via recordRunSafe as a classified/fingerprinted failure and stamps the run interrupted via persistRunMetadataIfChanged so the next scheduled update retries instead of no-op'ing against a half-written wiki; telemetry is awaited only for flush, a telemetry failure never blocks the stamp or the non-zero exit, the stderr line carries the raw message (a stack only under OPENWIKI_DEBUG), and the process exits non-zero on the next setImmediate tick.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent/crash-guard.ts#L103-L159",
+          "version": "repo-lines-v1:sha256:251ae14b75c72196ed73ed9f950452ce18a253daae482f300a27732b8e0fcdf3:eyJzZWxlY3RlZExpbmVDb3VudCI6NTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdmODMzNzQ0MTg2YjZiNDIxYTgyNTQ3MGIwNjdkMjQ3ZTIyMGZmYTJmNjU3ZjQ1OTFjYjUzMjE5ZTQ1MGRhOTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFiNTYwMDk4ZDQwNjNjY2E3NWQyMjkxMjRmOTA5M2UzNmNmNWI2MzIzNzg5MGZjMTM4ZGJhNTRiZGZmNGU1ZjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImViZDJkMWM2MWYzZGQwNjNlZWZjNTA4ZWIzNTBlNzZlZWZmY2U0ZWRjZDNlNDlkYzMwMDNlZTI5OTY1ZmVkODUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8a3d1a617d854b8d9a314b332dbc5367",
+      "statement": "writeLastUpdateMetadata persists run metadata (updatedAt, command, gitHead, model, status, optional language) at openwiki/.last-update.json (UPDATE_METADATA_PATH) in repository mode or .last-update.json (LOCAL_WIKI_METADATA_PATH) at the local-wiki root, written through writeTextAtomic: content goes to a .<basename>.<uuid>.tmp sibling that is rename'd into place, preserving the destination's existing mode bits (defaulting to 0o644 when creating). The rename keeps the prior metadata intact until the new JSON is fully written, so a mid-write crash (ENOSPC, power loss) cannot truncate the checkpoint the next update diffs against.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent/utils.ts#L201-L227",
+          "version": "repo-lines-v1:sha256:0b51774a50bb9f380bad9759e178945fb021347eb435c59f416733817efc93c6:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkzY2I3OGRkNzgwNWM1OGRiNTY1MDU2ZGI4NWY4YTFiNTRlYjA0YzdhYjAzZTUxYjljOTkzMWY0ZDIxZDAwNmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJhMWNiNDNlZjFhMmI2OTM2NDY0NjkzODY4YWZiNzVlMzJkNjI3YzY2YzNkOTJhMWNmYTA0OWI0YTIwM2FkZGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ2ZDQzOGE1YTlmZTlhNTY4NmFkZDM3NmNmYTViNzc5MzY1MmI3YjdkMGZlMmIwZDY1NjUzMWVhN2NlMTVjODYifQ"
+        },
+        {
+          "resource": "repo://src/integrations/install/atomic-file.ts#L12-L37",
+          "version": "repo-lines-v1:sha256:58de31874959aab28761139ea9dbd83d99d6f00961f2c59f0e578f0384e6ffa2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkzN2Q0NDYwZWYxNWNmODdlODQ2ZWYzZWQxNjM1NjMxOGY1NDZkZDNhMGEwNzU2MWM4M2RkNTZlM2EyNjdhZTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjEwYTNlMGRiOTYyMGUwOGUzOWRmZGRhYjdmNDYyZTc0MmQ0Y2VkYmIxYmVjOWY5NzA3YzJhMzkyMTNlMWJjZGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_046c878dabce4e12be6448a151b50ae1",
+      "statement": "persistRunMetadataIfChanged is the run-boundary wrapper: it always refreshes the .last-update.json updatedAt timestamp so freshness reflects the actual last run even when content is unchanged (a no-op update still means OpenWiki ran), a completed run clears any previous interrupted status so the update no-op check can skip again, and it returns false (writing nothing) for chat or when no before-snapshot was captured, so only content-bearing init/update runs touch the metadata.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent/utils.ts#L229-L260",
+          "version": "repo-lines-v1:sha256:5fd74e76618019703347a86ea5ac2bed52f48f9aee3acc4f2fc449a864c901b3:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMGY2NzRjNmYxZTc4ZjkxNjkzNWRjY2E2MWQ0MTlmODJlMWQ2MWUxMDA4ZmNkNjA5NTMwYzhmM2IyMzRmNzMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY1M2U3ZWZlYWFmNzdkZDE2ZDA4NDhlNmRiMGU5YmY4ZDY3MjJkYjNjMjhlYjM1ZWIwYmIxMzI2ZTMyYzc3YTAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e0216f0d235b40f989c241129c89cbaf",
+      "statement": "readLastUpdate reads .last-update.json defensively: a missing file or SyntaxError returns null, a structurally invalid record returns null, and a record written before the status field existed is treated as complete so an upgrade never forces a spurious re-run. getUpdateNoopStatus forces a rebuild when the prior run was interrupted or has no gitHead; otherwise it diffs the current gitHead against the recorded one and filters working-tree status through isUpdateMetadataStatusLine, which ignores changes to openwiki/.last-update.json and openwiki/.page-manifest.json (and their ' -> ' rename forms). The content snapshot excludes those metadata files plus .run.json via isIgnoredSnapshotPath, so a no-op refresh re-writes .last-update.json without it appearing as a content change.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent/utils.ts#L119-L188",
+          "version": "repo-lines-v1:sha256:14afb3570ac29656ae9c8cb9a209c97f25a7a63057c73a5bb84f6d25b069d7b8:eyJzZWxlY3RlZExpbmVDb3VudCI6NzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgzNmZlZjQwNjBkNTVjMDI4YWY0ODk1MTU1MmZhNDAwZjYwYWQyMDA5ODBkNjhjYTIxNzliYjBkZmE5YmZmNTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg3OGNjYjA0ZjQwZjQ3NmUzMzRkOTk5NzIyMmY4NjI5NmMzMTJlMDAxZDY2YWZmOTcxOWQzNmVjYzkwZTM4NWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVmMmY2ZGI0ZjIxNmFkMzFjMWYwYzI0ZWYwZWJmODU0MTY4NGY3ODY4ZTkwZjlmNzUxN2YyNjZjNzQ1NDI1ZDcifQ"
+        },
+        {
+          "resource": "repo://src/agent/utils.ts#L697-L742",
+          "version": "repo-lines-v1:sha256:424ad438eff2706ccf46b5dd1402c1d35dc2693c807c53bf00e850adb627dda4:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM0Yzc2OWFhMDg5Zjg0NWE4MmE0ZTk3ZmZlNjEzMjhkODk1Zjk0ZGQwMGUyNzRiMGE4YmU2M2E2ODE5ODkwYjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYyM2NjODcwNDFjNzFhMjM3OTViNWQyZDQ0YzdhMzcxMTVmZWUyN2U0M2ZjMDkwMzNhMmQ2ZWVjNjY4OWNlZWUifQ"
+        },
+        {
+          "resource": "repo://src/agent/utils.ts#L804-L811",
+          "version": "repo-lines-v1:sha256:2e0a7da4e02f5a8a05ffad01d5bfaac944dfbddaa3970eaa69db8b9494cc22af:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTcwOWJiYTQ4MzFjYTlhNGI2MDk2M2U3MDNmY2E4MTg1ZDMwYjZjYjU1MmRiNjEwZDY1NDJjYzIxYjMwNTVmYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWU5MjE3Yjc2N2M5NmYwM2RiYjY3NjIyOGIzY2E4ZjJmNDZmZjllZjEzMmQ3OTk2MjVhZmVhYTlhZTYxZjJlYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODVmNjJlYWMwYzZjYjkyMDNhZjkyYzE0Y2ZjYjZmZTg0YjQ3MmM3OWIzYTJlMzNjYzM2NGFiZmQzZGY0Y2IwNiJ9"
+        },
+        {
+          "resource": "repo://src/agent/utils.ts#L816-L822",
+          "version": "repo-lines-v1:sha256:f4205c14eab45c79b4023a55f4f255ed9a11790ecc96b79d3776b02c9c4417d6:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGUwMzEwMGE0ODk5ZjQ0NjhjMzBlZGViNmJiNGI1YmRkNDIwNzFlNDVlMWYyMzZiMzUzMjVmM2E1YzYwZDM5OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmZkZDNiYjcwNzBjYzQ5ZDhhNjZmY2M4YjMyNjExMGE3NjZlZjQzM2YyNmJjMDJjZDJkOGMyZTcwN2M4OGI0OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTEwNDk0ZDQyNDFlYTFhYThlMmE3MmJhMjQ5NjNlOGIxYWIzMjE0NTliMjllZWYwY2M1MTM2YjAyOGRiOThlMSJ9"
+        },
+        {
+          "resource": "repo://src/agent/utils.ts#L878-L889",
+          "version": "repo-lines-v1:sha256:be715bed817fa1e85a68b4db21020ac2e375cb9930d5deeff9c3d57cecb994df:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA4MjFlZGFmNWE2ZTc5NWZiODc1MDQyNzcyMTUzZGQ5OWRjYjAyN2ZiMzNiNjc2YjRiYzhmZmY2NWJkYTNjNjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE1YTc5OTdmNDUzOGYzNjM2MTBjMDUzNGY0OGE5NTRlYTA3MjJkOWVhMjU1N2M2OTIwN2U2NmIwYzNhMTE4ZWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc4Y2I5NTJlMTQ1OWE3OTljOGI2MDgwZGNkNDY5ZDg3ZGMxMDk5Njc0ZTgzZWUzNzMyNzY1Yjc2MjI2OWZmYzAifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.1",
-    "at": "2026-10-07T08:10:39.081Z"
+    "at": "2026-10-08T08:11:37.939Z"
   }
 }

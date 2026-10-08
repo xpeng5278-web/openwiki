@@ -36,10 +36,10 @@ sources:
     resource: repo://src/integrations/install/registry.ts
   - id: openwiki-source-349c953869b025f9d4935470
     resource: repo://src/platform/language.ts
-generated: { by: "openwiki/0.7.1", at: "2026-10-07T08:10:39.081Z" }
+generated: { by: "openwiki/0.7.1", at: "2026-10-08T08:11:37.939Z" }
 verified:
   - by: openwiki/0.7.1
-    at: 2026-10-07T08:10:39.081Z
+    at: 2026-10-08T08:11:37.939Z
 ---
 
 # OpenWiki Quickstart
@@ -162,12 +162,14 @@ the canonical wiki pages; each one links into the deeper source map.
 | Understand grounded Claims: material facts tied to versioned repository evidence   | [Grounded Claims](./concepts/grounded-claims.md)             |
 | See what OKF output looks like (frontmatter, provenance, validated Mermaid)        | [Open Knowledge Format Output](./concepts/okf-output.md)     |
 | Look up supported model providers, their env keys, base URLs, auth methods (API keys, OAuth, AWS SDK, external CLI, IBM Bob, Entra ID), and credentials | [Model Providers and Credentials](./concepts/model-providers.md) |
+| Understand the two operating modes (code default vs personal), where each writes its wiki, and what tools and connectors each permits | [Code and Personal Modes](./concepts/two-modes.md) |
 
 ### Follow a workflow end to end
 
 | I want to…                                                                                                              | Read                                                                  |
 | ----------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
 | Set up OpenWiki for the first time (provider/model, credentials, repo setup)                                            | [First-Run Onboarding](./workflows/onboarding.md)             |
+| Trace personal-mode ingestion: connector ingest, raw-file staging, the ingestion target parser, and writing to `~/.openwiki/wiki` | [Personal Ingestion](./workflows/personal-ingestion.md) |
 | Trace the resumable page-job generation flow (`begin → submit_plan → next_page → submit_page → finish`, with on-demand `inspect_page_claims`)                  | [Repository Generation Lifecycle](./workflows/repository-generation.md) |
 | Understand repository-run tracing: how one planner and one page worker per page share a single LangSmith thread named "planning agent" and "worker agent: <page>", resolved from `OPENWIKI_TRACE_THREAD_ID` or the durable run id | [Agent Runtime, Models, and Middleware](./architecture/agent-runtime.md) and [Repository Generation Lifecycle](./workflows/repository-generation.md) |
 | Understand how a failing or early-exiting page worker is skipped and restored without losing completed pages            | [Repository Generation Lifecycle](./workflows/repository-generation.md) |
@@ -179,7 +181,7 @@ the canonical wiki pages; each one links into the deeper source map.
 
 | I want to…                                                                                   | Read                                                         |
 | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| Look up CLI commands and flags (init/update, mode, print, integrations, visualize, schedule) | [CLI Reference](./operations/cli-reference.md)        |
+| Look up CLI commands and flags (init/update, mode, print, integrations, mcp, link, workspace, auth, ngrok, cron, ingest, visualize) | [CLI Reference](./operations/cli-reference.md)        |
 | Understand environment loading, the `~/.openwiki` state directory, provider/token/reasoning settings, and secret sanitization | [Configuration and Environment](./operations/configuration.md) |
 | Set up scheduled self-update in CI and the docs-PR workflow                                  | [CI Scheduling and Self-Update](./operations/ci-scheduling.md) |
 

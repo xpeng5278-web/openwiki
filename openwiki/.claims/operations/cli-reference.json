@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:d323561bfc1fe859a46dd3e4ea6b2e795aeb49a070a5a229ccac82906a3fc040",
+  "pageVersion": "sha256:bdc713ba3c09b11392407917b89b247fc457984678ffd53fa0894502c51a27b0",
   "claims": [
     {
       "id": "claim_e161d3153b544232b9f17aa2f2838616",
@@ -160,15 +160,19 @@
     },
     {
       "id": "claim_d8e7724e5cd3448da91a68ca0c427824",
-      "statement": "When no mode is selected, a run defaults to personal, but init/update runs with default mode source are promoted to code.",
+      "statement": "When no mode is selected, parseRunCommand defaults to code: parseCommand calls parseRunCommand(argv, 'code', 'default') at line 625, so a bare `openwiki` opens the code chat for the current repository and init/update runs target the repository; personal must be selected explicitly (positional or --mode).",
       "evidence": [
-        {
-          "resource": "repo://src/cli/commands.ts#L625-L626",
-          "version": "repo-lines-v1:sha256:1f17fa9b4b3dcafcce01599ec00f772342dd388dc84e6189f086b5b8dad2e3ab:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDA4ZjIyYWQ5OGVlZjRmYThkMjA0Mzc1ZjJjMzcwNzNkZjliNzA0ZGM2MjM4ZjYxZDk1MjZiMjJjYzlkNGNjZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWIzYmFiNGY1NjdmNWUyNGQ1MTIxNDdhOTAyMjNjMTBiNmYzZWYzODNiZTAyY2FlM2NjMTQ3ZjA3OTc0NDVmZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2NlYmQ3Yzg1OGFkNGI1Y2QxYjQ3NzVkYTBhNjUwMTI4MGNjZjI4ZDlhNDEyMGEzNzlkMDc5MTNhYzNkNDlkYSJ9"
-        },
         {
           "resource": "repo://src/cli/commands.ts#L1075-L1077",
           "version": "repo-lines-v1:sha256:8419512428149639cc9fd589d04f36b939166fbe0587d04804d2165a659eb992:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYWRiNjg5MzRkMDcxN2FjZTM5ZDA0ODJhNDkyYzhiZTRkYzg4YTFkNGNhOGU5Yzg0MDM4MmJiOWI5YTA1NWM3MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmVlZWZkZDUxMTNkOTkwNTZmMWUxOWRlMWI3ZDViZWRlNmUwYTMwMWY5ZThmN2JlNGVhZDNmOGY4ZGE4NjZjOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjEzMGIyYTk0ZTRmMTc1ZTNmOTA2NWMzMWJiNDllZDY5NzM1Y2RkMzZjNmMwYTY2YjIzMjQyMGIyZmVmMGQzOSJ9"
+        },
+        {
+          "resource": "repo://src/cli/commands.ts#L1224-L1227",
+          "version": "repo-lines-v1:sha256:18e5330f2b34aec2d9251e123f4f28b5e67f930a60f9c4709f2a7e2aaf7a7cdf:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2U5YzJmZDhlZDkzZTE5ZjgxM2E0OWZjYTI3OTJmNGU2YThjNjBhYWIzOWNmYzU0OWJlZjUzYjM1NjBkZTMxNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWYwY2RiOTcyYTdiZmI3ZWQyNDZmOWZmNjcyMzg1ZTU1ZjQ5NjhmYzExMDQzZGM1YjY4NGQ1MWRmYTMxZGJjYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjY2ZDMzYzI3MzBhOTFlNDVmODg3ZDIzYjk3YWY1ZjQ3ODUzNjc1ZDlhZmZmMzYzMmQ4MWEwM2QwM2NlZmNkZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMGM3ZWE4MmVkODM4ZWQ4NmI5YTQwZTczODhhMTVkMTM0MTM5OTJhYTU4YmIxZWRjM2VhMmMwNjc1NGU5NDhjNCJ9"
+        },
+        {
+          "resource": "repo://src/cli/commands.ts#L621-L625",
+          "version": "repo-lines-v1:sha256:ad4df06a369db0b6aff864442860da7170d4be96acac38ad88fa675765f46937:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTA4OTJhMzU0MWQ0Mzc4YzBiYjI1NjBhMTY2MzY5MDExZGQyM2IxOWUzMGI3YWY0ODM4YjE2YzhkMjMzZDRjMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDA4ZjIyYWQ5OGVlZjRmYThkMjA0Mzc1ZjJjMzcwNzNkZjliNzA0ZGM2MjM4ZjYxZDk1MjZiMjJjYzlkNGNjZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTdkODYzMmU1NGU5Mjk4YWJiOTU4NzI3ZTJkNTE0MDhhYmFmMTM2NjAzNTM3OTEwMTQwYWJmNjViMzBhYjYxMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzc5MjllOTFlMGY5OWMzZTgyNWRlNjliNDM1ZmI2NDg0ZDFiMGExZGYyZjQ2NTYxYWJmMWEyOWYwNDE4OGI4OCJ9"
         }
       ]
     },
@@ -567,6 +571,6 @@
   ],
   "verification": {
     "by": "openwiki/0.7.1",
-    "at": "2026-10-07T08:10:39.081Z"
+    "at": "2026-10-08T08:11:37.939Z"
   }
 }
